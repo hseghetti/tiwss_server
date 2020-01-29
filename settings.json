@@ -1,0 +1,18 @@
+{
+    "scaleserp": {
+        "authentication": {
+            "attribute": "api_key",
+            "value": "SCALESERP_TOKEN"
+        },
+        "queryAttribute": "q",
+        "url": "https://api.scaleserp.com/search"
+    },
+    "serpstack": {
+        "authentication": {
+            "attribute": "access_key",
+            "value": "SERPSTACK_TOKEN"
+        },
+        "queryAttribute": "query",
+        "url": "http://api.serpstack.com/search"
+    }
+}

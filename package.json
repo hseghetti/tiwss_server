@@ -1,0 +1,27 @@
+{
+  "name": "tiwss_server",
+  "version": "1.0.0",
+  "description": "NODE server to provide the api for the TIWSS project",
+  "main": "server.js",
+  "scripts": {
+    "start_local": "nodemon -r dotenv/config ./server/server.js",
+    "start": "node ./server/server.js",
+    "test": "..."
+  },
+  "keywords": [
+    "node",
+    "search",
+    "site"
+  ],
+  "author": "Hernan Seghetti",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.1",
+    "express": "^4.17.1",
+    "get-website-text": "^1.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2"
+  }
+}
