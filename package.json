@@ -4,7 +4,7 @@
   "description": "NODE server to provide the api for the TIWSS project",
   "main": "server.js",
   "scripts": {
-    "start_local": "nodemon -r dotenv/config ./server/server.js",
+    "start_local": "nodemon -r dotenv/config server.js",
     "start": "node ./server/server.js",
     "test": "..."
   },
@@ -18,7 +18,7 @@
   "dependencies": {
     "axios": "^0.19.1",
     "express": "^4.17.1",
-    "get-website-text": "^1.0.1"
+    "puppeteer": "^2.1.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

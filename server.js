@@ -1,28 +1,28 @@
-const axios = require("axios");
-const express = require("express");
-const settings = require("./settings.json");
+const axios = require('axios');
+const express = require('express');
+const settings = require('./settings.json');
 const app = express();
-const _gwt = require("get-website-text");
+const websiteParser = require('./websiteParser');
 
 app.listen(process.env.PORT, () => {
-    console.log("Server is listening on port: " + process.env.PORT);
+    console.log('Server is listening on port: ' + process.env.PORT);
 });
 
-app.get("/search", async (req, res, next) => {
-    logging("Begin", "Search: " + req.query.q);
+app.get('/search', async (req, res, next) => {
+    logging('Begin', 'Search: ' + req.query.q);
     res.send(await search(req.query.q));
-    logging("Ends ", "Search: " + req.query.q);
+    logging('Ends ', 'Search: ' + req.query.q);
 });
 
-app.get("/site", async(req, res) => {
-    logging("Begin", "Site: " + req.query.q);
+app.get('/site', async(req, res) => {
+    logging('Begin', 'Site: ' + req.query.q);
     res.send(await getSiteText(req.query.q));
-    logging("Ends ", "Site: " + req.query.q);
+    logging('Ends ', 'Site: ' + req.query.q);
 });
 
 const getSiteText = site => {
     return new Promise((resolve, reject) => {
-        _gwt.getWebsiteText(site, 5)
+        websiteParser(site, 2000)
             .then(function(data) {
                 if (data.error) {
                     console.log('Couldnt get website: ' + site);
@@ -45,11 +45,11 @@ const search = query => {
             params: {
                 [settings.serpstack.authentication.attribute]: process.env[settings.serpstack.authentication.value],
                 [settings.serpstack.queryAttribute]: query,
-                num: 15
+                num: 30,
+                type: 'news',
+                period: 'last_year'
             }
         }).then(response => {
-            let asd = processData(response.data);
-            // console.log(asd)
             resolve(processData(response.data));
         }).catch(error => {
             console.log('---ERROR--- ' + error);
@@ -60,9 +60,10 @@ const search = query => {
 
 const processData = (data = {}) => {
     const results = [];
-
-    if (data.organic_results.length) {
-        data.organic_results.forEach(result => {
+    console.log(data)
+    // if (data.organic_results.length) {
+    if (data.news_results.length) {
+        data.news_results.forEach(result => {
             results.push(result.url)
         });
     }
@@ -73,5 +74,5 @@ const processData = (data = {}) => {
 };
 
 const logging = (type, service) => {
-    console.log("--- " + service + " --- Request " + type + " --- " + Date.now());
+    console.log('--- ' + service + ' --- Request ' + type + ' --- ' + Date.now());
 };
