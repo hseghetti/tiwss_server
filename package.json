@@ -16,7 +16,7 @@
   "author": "Hernan Seghetti",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "puppeteer": "^2.1.1"
   },
